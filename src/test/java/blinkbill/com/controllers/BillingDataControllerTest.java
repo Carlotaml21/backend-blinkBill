@@ -26,11 +26,10 @@ class BillingDataControllerTest {
     void getBillingData() {
         final var filter = "filter";
 
-
         Mockito.when(billingDataService.getAllBillingData(filter)).thenReturn(List.of());
 
         final var result = billingDataController.getBillingData(filter);
 
-        Assertions.assertEquals(List.of(), result);
+        Assertions.assertEquals(List.of(), result.getBody());
     }
 }
