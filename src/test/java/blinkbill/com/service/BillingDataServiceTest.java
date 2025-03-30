@@ -43,6 +43,18 @@ class BillingDataServiceTest {
         verify(billingDataRepository).findAll();
         verify(billingDataRepository, never()).findAll(anyString());
     }
+    @Test
+    void getAllBillingData_withFilter_callsFilteredMethod() {
+        String filter = "filter";
+        List<BillingData> expected = List.of();
+        when(billingDataRepository.findAll(filter)).thenReturn(expected);
+
+        List<BillingData> result = billingDataService.getAllBillingData(filter);
+
+        assertEquals(expected, result);
+        verify(billingDataRepository).findAll(filter);
+        verify(billingDataRepository, never()).findAll();
+    }
 
 
 
