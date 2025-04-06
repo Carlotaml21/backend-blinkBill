@@ -9,8 +9,14 @@ import java.util.List;
 @Repository
 public class BillingDataRepository {
 
+    private final BillingDataRepositoryJPA repositoryJPA;
+
+    public BillingDataRepository(BillingDataRepositoryJPA repositoryJPA) {
+        this.repositoryJPA = repositoryJPA;
+    }
+
     public List<BillingData> findAll() {
-        return Collections.emptyList();
+        return repositoryJPA.findAll();
     }
 
     public List<BillingData> findAll(String filter) {
