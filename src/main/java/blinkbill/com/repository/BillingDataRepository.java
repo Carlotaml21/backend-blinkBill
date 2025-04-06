@@ -20,6 +20,6 @@ public class BillingDataRepository {
     }
 
     public List<BillingData> findAll(String filter) {
-        return Collections.emptyList();
+        return repositoryJPA.findAllByNameContainingIgnoreCaseOrTaxIdContainingIgnoreCase(filter, filter);
     }
 }

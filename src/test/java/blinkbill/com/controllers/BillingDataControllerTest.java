@@ -1,6 +1,5 @@
 package blinkbill.com.controllers;
 
-import blinkbill.com.BillingData;
 import blinkbill.com.service.BillingDataService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

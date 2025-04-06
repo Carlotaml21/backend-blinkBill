@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface BillingDataRepositoryJPA extends JpaRepository<BillingData, Long> {
 
+    List<BillingData> findAllByNameContainingIgnoreCaseOrTaxIdContainingIgnoreCase(String name, String taxId);
+
 }
