@@ -35,4 +35,21 @@ class BillingDataRepositoryTest {
         verify(repositoryJPA, times(1)).findAll();
     }
 
+
+    @Test
+    void testFindAllWithFilter() {
+        String filter = "test";
+        BillingData data = new BillingData();
+        List<BillingData> expected = List.of(data);
+
+        when(repositoryJPA.findAllByNameContainingIgnoreCaseOrTaxIdContainingIgnoreCase(filter, filter))
+                .thenReturn(expected);
+
+        List<BillingData> result = billingDataRepository.findAll(filter);
+
+        assertEquals(expected, result);
+        verify(repositoryJPA, times(1))
+                .findAllByNameContainingIgnoreCaseOrTaxIdContainingIgnoreCase(filter, filter);
+    }
+
 }
