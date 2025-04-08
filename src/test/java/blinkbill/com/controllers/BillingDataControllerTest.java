@@ -1,14 +1,17 @@
 package blinkbill.com.controllers;
 
+import blinkbill.com.BillingData;
 import blinkbill.com.service.BillingDataService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 class BillingDataControllerTest {
 
@@ -25,10 +28,25 @@ class BillingDataControllerTest {
     void getBillingData() {
         final var filter = "filter";
 
-        Mockito.when(billingDataService.getAllBillingData(filter)).thenReturn(List.of());
+        when(billingDataService.getAllBillingData(filter)).thenReturn(List.of());
 
         final var result = billingDataController.getBillingData(filter);
 
-        Assertions.assertEquals(List.of(), result.getBody());
+        assertEquals(List.of(), result.getBody());
+    }
+    @Test
+    void postBillingData(){
+        BillingData input = new BillingData("Test 1" ,"1234567A", "Calle 1", "Oviedo", "Asturias", 33011);
+        BillingData saved = new BillingData("Test 1" ,"1234567A", "Calle 1", "Oviedo", "Asturias", 33011);
+        saved.setId(100L);
+
+        when(billingDataService.saveBillingData(input)).thenReturn(saved);
+
+        var result = billingDataController.postBillingData(input);
+
+        assertEquals(HttpStatus.CREATED, result.getStatusCode());
+        assertEquals(saved, result.getBody());
+        verify(billingDataService).saveBillingData(input);
+
     }
 }
