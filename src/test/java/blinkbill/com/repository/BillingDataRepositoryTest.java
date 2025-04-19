@@ -79,6 +79,26 @@ class BillingDataRepositoryTest {
         verify(repositoryJPA, times(1)).save(input);
     }
 
+    @Test
+    void testFindById() {
+        Long id = 1L;
 
+        BillingData expected = new BillingData();
+        expected.setId(id);
+        expected.setName("Empresa");
+        expected.setTaxId("X12345678");
+        expected.setAddress("Calle");
+        expected.setCity("Ciudad");
+        expected.setProvince("Provincia");
+        expected.setPostalCode(12345);
+
+        when(repositoryJPA.findById(id)).thenReturn(java.util.Optional.of(expected));
+
+        var result = billingDataRepository.findById(id);
+
+        assertTrue(result.isPresent());
+        assertEquals(expected, result.get());
+        verify(repositoryJPA, times(1)).findById(id);
+    }
 
 }
