@@ -31,5 +31,11 @@ public class BillingDataController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedData);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<BillingData> updateBillingData(@PathVariable Long id, @RequestBody BillingData billingData) {
+        BillingData updated = billingDataService.update(id, billingData);
+        return ResponseEntity.ok(updated);
+    }
+
 
 }
