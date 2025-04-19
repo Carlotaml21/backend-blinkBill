@@ -37,5 +37,12 @@ public class BillingDataController {
         return ResponseEntity.ok(updated);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBillingData(@PathVariable Long id) {
+        billingDataService.delete(id);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+
+
 
 }
