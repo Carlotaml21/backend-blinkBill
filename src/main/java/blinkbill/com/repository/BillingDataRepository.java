@@ -3,6 +3,7 @@ package blinkbill.com.repository;
 import blinkbill.com.BillingData;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class BillingDataRepository {
@@ -23,5 +24,9 @@ public class BillingDataRepository {
 
     public List<BillingData> findAll(String filter) {
         return repositoryJPA.findAllByNameContainingIgnoreCaseOrTaxIdContainingIgnoreCase(filter, filter);
+    }
+
+    public Optional<BillingData> findById(Long id) {
+        return repositoryJPA.findById(id);
     }
 }
