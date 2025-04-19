@@ -40,13 +40,13 @@ class BillingDataControllerTest {
         BillingData saved = new BillingData("Test 1" ,"1234567A", "Calle 1", "Oviedo", "Asturias", 33011);
         saved.setId(100L);
 
-        when(billingDataService.saveBillingData(input)).thenReturn(saved);
+        when(billingDataService.save(input)).thenReturn(saved);
 
         var result = billingDataController.postBillingData(input);
 
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
         assertEquals(saved, result.getBody());
-        verify(billingDataService).saveBillingData(input);
+        verify(billingDataService).save(input);
 
     }
 }
