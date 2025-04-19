@@ -55,7 +55,18 @@ class BillingDataServiceTest {
         verify(billingDataRepository).findAll(filter);
         verify(billingDataRepository, never()).findAll();
     }
+    @Test
+    void saveBillingData_savesAndReturns() {
+        BillingData input = new BillingData("Empresa test", "Y12345678", "calle", "oviedo", "Asturias", 33011);
+        BillingData saved = new BillingData("Empresa test", "Y12345678", "calle", "oviedo", "Asturias", 33011);
+        saved.setId(101L);
 
+        when(billingDataRepository.save(input)).thenReturn(saved);
 
+        BillingData result = billingDataService.save(input);
+
+        assertEquals(saved, result);
+        verify(billingDataRepository).save(input);
+    }
 
 }
