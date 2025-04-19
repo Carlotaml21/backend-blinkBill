@@ -26,8 +26,8 @@ public class BillingDataController {
     }
 
     @PostMapping()
-    public ResponseEntity<BillingData> postBillingData(@RequestBody BillingData newbillingData) {
-        BillingData savedData = billingDataService.saveBillingData(newBillingData);
+    public ResponseEntity<BillingData> postBillingData(@RequestBody BillingData billingData) {
+        BillingData savedData = billingDataService.save(billingData);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedData);
     }
 
