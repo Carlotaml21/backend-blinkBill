@@ -96,4 +96,21 @@ class BillingDataServiceTest {
         verify(billingDataRepository).save(existing);
     }
 
+    @Test
+    void deleteBillingData_deletesIfExists() {
+        Long id = 200L;
+
+        BillingData existing = new BillingData();
+        existing.setId(id);
+
+        when(billingDataRepository.findById(id)).thenReturn(java.util.Optional.of(existing));
+        doNothing().when(billingDataRepository).delete(existing);
+
+        billingDataService.delete(id);
+
+        verify(billingDataRepository).findById(id);
+        verify(billingDataRepository).delete(existing);
+    }
+
+
 }
