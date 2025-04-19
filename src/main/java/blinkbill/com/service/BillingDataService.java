@@ -43,5 +43,14 @@ public class BillingDataService {
         return billingDataRepository.save(existing);
     }
 
+    public void delete(Long id) {
+        BillingData existing = billingDataRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Company with ID " + id + " not found"));
+
+        billingDataRepository.delete(existing);
+    }
+
+
 
 }
