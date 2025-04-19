@@ -69,4 +69,31 @@ class BillingDataServiceTest {
         verify(billingDataRepository).save(input);
     }
 
+    @Test
+    void updateBillingData_updatesAndReturns() {
+        Long id = 200L;
+
+        BillingData input = new BillingData("Nueva Empresa", "Z98765432", "Calle Nueva", "León", "Castilla y León", 24001);
+        BillingData existing = new BillingData("Antigua Empresa", "X11111111", "Calle Vieja", "León", "Castilla y León", 24001);
+        existing.setId(id);
+
+        BillingData expectedUpdated = new BillingData("Nueva Empresa", "Z98765432", "Calle Nueva", "León", "Castilla y León", 24001);
+        expectedUpdated.setId(id);
+
+        when(billingDataRepository.findById(id)).thenReturn(java.util.Optional.of(existing));
+        when(billingDataRepository.save(existing)).thenReturn(expectedUpdated);
+
+        BillingData result = billingDataService.update(id, input);
+
+        assertEquals(expectedUpdated.getName(), result.getName());
+        assertEquals(expectedUpdated.getTaxId(), result.getTaxId());
+        assertEquals(expectedUpdated.getAddress(), result.getAddress());
+        assertEquals(expectedUpdated.getCity(), result.getCity());
+        assertEquals(expectedUpdated.getProvince(), result.getProvince());
+        assertEquals(expectedUpdated.getPostalCode(), result.getPostalCode());
+
+        verify(billingDataRepository).findById(id);
+        verify(billingDataRepository).save(existing);
+    }
+
 }
