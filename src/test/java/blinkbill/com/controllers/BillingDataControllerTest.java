@@ -66,4 +66,17 @@ class BillingDataControllerTest {
         verify(billingDataService).update(id, input);
     }
 
+    @Test
+    void deleteBillingData_deletesSuccessfully() {
+        Long id = 100L;
+
+        doNothing().when(billingDataService).delete(id);
+
+        var result = billingDataController.deleteBillingData(id);
+
+        assertEquals(HttpStatus.NO_CONTENT, result.getStatusCode());
+        verify(billingDataService).delete(id);
+    }
+
+
 }
