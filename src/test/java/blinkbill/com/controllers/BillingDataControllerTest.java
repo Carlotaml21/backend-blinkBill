@@ -47,6 +47,23 @@ class BillingDataControllerTest {
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
         assertEquals(saved, result.getBody());
         verify(billingDataService).save(input);
-
     }
+
+    @Test
+    void updateBillingData() {
+        Long id = 100L;
+
+        BillingData input = new BillingData("Empresa Actualizada", "B99999999", "Calle Nueva", "Gijón", "Asturias", 33201);
+        BillingData updated = new BillingData("Empresa Actualizada", "B99999999", "Calle Nueva", "Gijón", "Asturias", 33201);
+        updated.setId(id);
+
+        when(billingDataService.update(id, input)).thenReturn(updated);
+
+        var result = billingDataController.updateBillingData(id, input);
+
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(updated, result.getBody());
+        verify(billingDataService).update(id, input);
+    }
+
 }
