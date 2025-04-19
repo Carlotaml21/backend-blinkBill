@@ -29,4 +29,8 @@ public class BillingDataRepository {
     public Optional<BillingData> findById(Long id) {
         return repositoryJPA.findById(id);
     }
+
+    public void delete(BillingData billingData) {
+        repositoryJPA.delete(billingData);
+    }
 }
