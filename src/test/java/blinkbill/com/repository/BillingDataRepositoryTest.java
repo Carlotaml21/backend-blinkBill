@@ -101,4 +101,17 @@ class BillingDataRepositoryTest {
         verify(repositoryJPA, times(1)).findById(id);
     }
 
+    @Test
+    void testDelete() {
+        BillingData data = new BillingData();
+        data.setId(1L);
+
+        doNothing().when(repositoryJPA).delete(data);
+
+        billingDataRepository.delete(data);
+
+        verify(repositoryJPA, times(1)).delete(data);
+    }
+
+
 }
