@@ -52,4 +52,33 @@ class BillingDataRepositoryTest {
                 .findAllByNameContainingIgnoreCaseOrTaxIdContainingIgnoreCase(filter, filter);
     }
 
+    @Test
+    void testSave() {
+        BillingData input = new BillingData();
+        input.setName("Empresa Ejemplo");
+        input.setTaxId("B12345678");
+        input.setAddress("Calle Falsa 123");
+        input.setCity("Madrid");
+        input.setProvince("Madrid");
+        input.setPostalCode(28080);
+
+        BillingData saved = new BillingData();
+        saved.setId(1L);
+        saved.setName("Empresa Ejemplo");
+        saved.setTaxId("B12345678");
+        saved.setAddress("Calle Falsa 123");
+        saved.setCity("Madrid");
+        saved.setProvince("Madrid");
+        saved.setPostalCode(28080);
+
+        when(repositoryJPA.save(input)).thenReturn(saved);
+
+        BillingData result = billingDataRepository.save(input);
+
+        assertEquals(saved, result);
+        verify(repositoryJPA, times(1)).save(input);
+    }
+
+
+
 }
