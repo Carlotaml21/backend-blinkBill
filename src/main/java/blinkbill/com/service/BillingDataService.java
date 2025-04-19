@@ -2,6 +2,7 @@ package blinkbill.com.service;
 
 import blinkbill.com.BillingData;
 import blinkbill.com.repository.BillingDataRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,5 +22,10 @@ public class BillingDataService {
         }
         return billingDataRepository.findAll(filter);
     }
+
+    public BillingData save(BillingData billingData) {
+        return billingDataRepository.save(billingData);
+    }
+
 
 }
