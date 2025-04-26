@@ -40,7 +40,7 @@ public class BillingDataController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBillingData(@PathVariable Long id) {
         billingDataService.delete(id);
-        return ResponseEntity.noContent().build(); // 204 No Content
+        return ResponseEntity.noContent().build();
     }
 
 
